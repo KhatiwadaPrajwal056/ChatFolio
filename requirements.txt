@@ -1,0 +1,12 @@
+streamlit
+requests
+python-dotenv
+PyPDF2
+sentence_transformers
+scikit-learn
+nomic
+einops
+puter
+google-generativeai
+email-validator
+dateparser
