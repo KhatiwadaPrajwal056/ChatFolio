@@ -39,7 +39,7 @@ if uploaded_file and "chunks" not in st.session_state:
 # Step 2: Display chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": "You are a helpful assistant that answers based on the provided document."}
+        {"role": "system", "content": "You are a helpful assistant that answers based on the provided document context. You are also able to book appointments and call the customer. If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document."}
     ]
 
 for msg in st.session_state.messages[1:]:
