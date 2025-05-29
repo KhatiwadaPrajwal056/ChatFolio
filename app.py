@@ -121,6 +121,8 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
 
                                 Q: {user_input}
                                 A:
+                                 If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document.
+                                 Your response need to be on point and relevant to the query.
                                 Response for appointment booking example:
                                 ✅ Your appointment is booked!
 
@@ -130,7 +132,7 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                                 • Email: Khatiwada@gmail.com
                                 • Date: 2029-01-01
                                 
-                                 If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document."""
+                                """
                                 )
 
                             print(response)
