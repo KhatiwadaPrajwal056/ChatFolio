@@ -34,7 +34,11 @@ if uploaded_file and "chunks" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": "You are a helpful assistant that answers based on the provided document context. You are also able to book appointments and call the customer. If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document."}
+        {"role": "system", "content": """You are a helpful assistant.
+        - Use the provided document to answer only when it is relevant.
+        - For appointment-related queries, collect booking details and confirm the booking politely.
+        - For all unrelated queries, answer using general knowledge.
+        - Be concise, polite, and clear."""}
     ]
 
 for msg in st.session_state.messages[1:]:
@@ -109,9 +113,7 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                                 {context}
 
                                 Q: {user_input}
-                                A:
-                                 If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document.
-                                 Your response need to be on point and relevant to the query.
+                                A
                                 Response for appointment booking example:
                                 ✅ Your appointment is booked!
 
@@ -120,7 +122,8 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                                 • Phone: +9779741
                                 • Email: Khatiwada@gmail.com
                                 • Date: 2029-01-01
-                                
+                                :
+                                .
                                 """
                                 )
 
