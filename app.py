@@ -5,10 +5,8 @@ from engine.rag_engine import load_pdf_text, chunk_text, embed_chunks_nomic, ret
 from engine.booking_tool import BookingFormTool
 import google.generativeai as genai
 
-# Disable file watcher for performance
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 
-# Load environment variables
 load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -22,13 +20,11 @@ st.title("📄 Chat with PDF + Booking Appointment")
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
-# Booking form tool instance and flag
 if "booking_tool" not in st.session_state:
     st.session_state.booking_tool = None
 if "booking_active" not in st.session_state:
     st.session_state.booking_active = False
 
-# Step 1: Save file and flag embedding pending
 if uploaded_file and "chunks" not in st.session_state:
     os.makedirs("docs", exist_ok=True)
     with open("docs/temp.pdf", "wb") as f:
@@ -36,7 +32,6 @@ if uploaded_file and "chunks" not in st.session_state:
     st.session_state.file_uploaded = True
     st.session_state.embedding_pending = True
 
-# Step 2: Display chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "system", "content": "You are a helpful assistant that answers based on the provided document context. You are also able to book appointments and call the customer. If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document."}
@@ -46,7 +41,6 @@ for msg in st.session_state.messages[1:]:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# Step 3: Do embedding only when pending
 if st.session_state.get("embedding_pending", False):
     with st.spinner("📄 Reading and Embedding..."):
         full_text = load_pdf_text("docs/temp.pdf")
@@ -57,7 +51,6 @@ if st.session_state.get("embedding_pending", False):
         st.session_state.embedding_pending = False
         st.success("✅ Document ready!")
 
-# Step 4: Chat input section
 if "chunks" in st.session_state and "embeddings" in st.session_state:
 
     user_input = st.chat_input("Ask about the document or request a call/appointment...")
@@ -66,7 +59,6 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
         st.chat_message("user").markdown(user_input)
         st.session_state.messages.append({"role": "user", "content": user_input})
 
-        # Booking flow active?
         if st.session_state.booking_active:
             tool = st.session_state.booking_tool
             valid, error_msg = tool.validate_and_store(user_input)
@@ -76,7 +68,6 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                     if tool.is_complete():
                         summary = tool.get_summary()
                         st.markdown(summary)
-                        # Reset booking state
                         st.session_state.booking_active = False
                         st.session_state.booking_tool = None
                         st.session_state.messages.append({"role": "assistant", "content": summary})
@@ -85,12 +76,10 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                         st.markdown(next_q)
                         st.session_state.messages.append({"role": "assistant", "content": next_q})
                 else:
-                    # Invalid input, ask again
                     st.markdown(error_msg)
                     st.session_state.messages.append({"role": "assistant", "content": error_msg})
 
         else:
-            # Detect if user wants to book appointment or call
             lower_input = user_input.lower()
             if any(kw in lower_input for kw in ["call me", "book appointment", "schedule appointment", "make appointment", "contact me"]):
                 st.session_state.booking_tool = BookingFormTool()
@@ -102,7 +91,7 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                     st.session_state.messages.append({"role": "assistant", "content": first_q})
 
             else:
-                # Normal document Q&A
+        
                 with st.chat_message("assistant"):
                     with st.spinner("Thinking..."):
                         related_chunks = retrieve_similar_chunks(

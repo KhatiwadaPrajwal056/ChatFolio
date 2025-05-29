@@ -13,7 +13,6 @@ def validate_email_address(email: str) -> bool:
 
 
 def validate_phone_number(phone: str) -> bool:
-    # Basic international phone regex: +1234567890 or 1234567890
     pattern = re.compile(r"^\+?\d{7,15}$")
     return bool(pattern.match(phone.strip()))
 

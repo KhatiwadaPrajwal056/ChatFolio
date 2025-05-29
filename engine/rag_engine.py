@@ -12,7 +12,6 @@ EMBEDDING = os.getenv("EMBEDDING_MODEL")
 
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 
-# Load Nomic model locally
 nomic_model = SentenceTransformer(EMBEDDING, trust_remote_code=True)
 
 def load_pdf_text(file_path):
@@ -30,8 +29,6 @@ def embed_chunks_nomic(chunks):
 
 def retrieve_similar_chunks(query, chunks, chunk_embeddings, top_k=3):
     query_embedding = nomic_model.encode([query])
-    # Compute cosine similarities between query and all chunk embeddings
     similarities = cosine_similarity(query_embedding, chunk_embeddings)[0]
-    # Get indices of top_k most similar chunks
     top_indices = similarities.argsort()[-top_k:][::-1]
     return [chunks[i] for i in top_indices]

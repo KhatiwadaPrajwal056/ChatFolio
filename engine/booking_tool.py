@@ -28,7 +28,7 @@ class BookingFormTool:
     def validate_and_store(self, user_input: str):
         field = self.get_current_field()
         if not field:
-            return True, None  # No more fields to ask
+            return True, None 
 
         user_input = user_input.strip()
 
