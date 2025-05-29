@@ -17,6 +17,13 @@ model = genai.GenerativeModel(model_name=GEMINI_MODEL)
 
 st.set_page_config(page_title="📄 Chat with PDF & Booking", layout="centered")
 st.title("📄 Chat with PDF + Booking Appointment")
+# Add a container to display appointment keywords
+st.container(border=True).markdown(
+    """
+    **For Appointments:**
+    Use phrases like: "call me", "book appointment", "schedule appointment", "make appointment", "contact me"
+    """
+)
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
