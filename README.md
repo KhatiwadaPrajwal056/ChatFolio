@@ -56,3 +56,23 @@ This Streamlit chatbot answers user questions based on uploaded PDF documents us
 This chatbot is ideal for scenarios where you need to quickly extract information from documents and also require a structured way to collect user contact or booking details.
 
 **Example Scenario:**
+
+Imagine a business that receives many inquiries through their website about their services and also needs to schedule appointments with potential clients. They can use this chatbot by uploading documents containing information about their services, pricing, or FAQs. Users can first ask the chatbot questions about the services based on the uploaded documents. If a user then decides they want to book a consultation or receive a call, they can simply ask the chatbot to "book an appointment" or "call me". The chatbot will then guide them through a simple conversation to collect their name, phone number, email, and preferred date for the appointment, validating each piece of information provided by the user. This streamlines both information delivery and lead collection processes.
+
+<!-- Add images to illustrate the scenario -->
+
+### 1. Landing Page
+
+![Landing Page](media/landing_page.png)
+
+### 2. Document Upload
+
+![Document Upload](media/document_upload.png)
+
+### 3. Chat Interaction (Part 1)
+
+![Chat Interaction 1](media/chat1.png)
+
+### 4. Chat Interaction (Part 2)
+
+![Chat Interaction 2](media/chat2.png)
