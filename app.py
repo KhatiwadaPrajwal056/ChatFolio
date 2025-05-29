@@ -15,7 +15,7 @@ GEMINI_MODEL = os.getenv("GEMINI_MODEL")
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(model_name=GEMINI_MODEL)
 
-st.set_page_config(page_title="📄 Chat with PDF + RAG & Booking", layout="centered")
+st.set_page_config(page_title="📄 Chat with PDF & Booking", layout="centered")
 st.title("📄 Chat with PDF + Booking Appointment")
 
 uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
@@ -34,11 +34,13 @@ if uploaded_file and "chunks" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "system", "content": """You are a helpful assistant.
-        - Use the provided document to answer only when it is relevant.
-        - For appointment-related queries, collect booking details and confirm the booking politely.
-        - For all unrelated queries, answer using general knowledge.
-        - Be concise, polite, and clear."""}
+        {"role": "system", "content": """You are a helpful assistant that can chat naturally and also help with documents and appointments.
+        
+        Instructions:
+        - For general conversation (greetings, casual chat), respond naturally using your general knowledge
+        - For document-related questions, use the provided context if available
+        - For appointment requests, help collect booking details
+        - Always be friendly, conversational, and helpful"""}
     ]
 
 for msg in st.session_state.messages[1:]:

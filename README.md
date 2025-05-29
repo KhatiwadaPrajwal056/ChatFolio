@@ -2,29 +2,16 @@
 
 ## Project Description
 
-This project is a Streamlit-based chatbot designed to answer user queries based on uploaded documents and collect user information through a guided conversational form for tasks like booking appointments or scheduling calls. It leverages a Retrieval-Augmented Generation (RAG) approach to provide context-aware answers from documents and integrates a conversational tool to collect structured data with input validation.
+This Streamlit chatbot answers user questions based on uploaded PDF documents using Retrieval-Augmented Generation (RAG). It also includes a conversational form to collect user details for tasks like booking appointments.
 
 ## Features
 
-*   **Document Question Answering:** Upload a PDF document and ask questions about its content. The chatbot uses RAG to find relevant information within the document to formulate its responses.
-*   **Conversational Booking/Contact Form:** When the user indicates a desire to book an appointment or be contacted, the chatbot initiates a conversational flow to collect necessary information such as Name, Phone Number, Email, and preferred Date.
-*   **Data Validation:** The conversational form includes basic validation for user inputs like email format, phone number format, and ensuring the booking date is in the future.
-*   **Date Parsing:** The bot can parse date inputs in various natural language formats (e.g., "next Monday", "tomorrow", "2024-12-31") and extract a standardized `YYYY-MM-DD` format.
-*   **LLM Integration:** Utilizes a Large Language Model (LLM), specifically configured for a Google Gemini model in `app.py`, for generating responses and handling the conversational flow.
-*   **Streamlit Interface:** Provides an easy-to-use web interface for uploading documents and interacting with the chatbot.
-
-## Technologies Used
-
-*   Python
-*   Streamlit
-*   LangChain (implied by the request, although not explicitly used in the provided core files, the architecture follows LangChain principles with tools and agents)
-*   Google Generative AI (Gemini)
-*   PyPDF2
-*   Sentence Transformers (for embeddings)
-*   Scikit-learn (for cosine similarity)
-*   python-dotenv
-*   email-validator
-*   dateparser
+*   **Document Q&A:** Ask questions about uploaded PDFs.
+*   **Conversational Booking:** Collect user information (Name, Phone, Email, Date) through a guided chat.
+*   **Data Validation:** Basic input validation for email, phone, and date.
+*   **Date Parsing:** Understands natural language dates.
+*   **LLM Integration:** Uses Google Gemini for responses and conversation flow.
+*   **Streamlit Interface:** Easy-to-use web interface.
 
 ## Installation
 
@@ -69,5 +56,3 @@ This project is a Streamlit-based chatbot designed to answer user queries based 
 This chatbot is ideal for scenarios where you need to quickly extract information from documents and also require a structured way to collect user contact or booking details.
 
 **Example Scenario:**
-
-Imagine a business that receives many inquiries through their website about their services and also needs to schedule appointments with potential clients. They can use this chatbot by uploading documents containing information about their services, pricing, or FAQs. Users can first ask the chatbot questions about the services based on the uploaded documents. If a user then decides they want to book a consultation or receive a call, they can simply ask the chatbot to "book an appointment" or "call me". The chatbot will then guide them through a simple conversation to collect their name, phone number, email, and preferred date for the appointment, validating each piece of information provided by the user. This streamlines both information delivery and lead collection processes.
