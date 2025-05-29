@@ -128,7 +128,9 @@ if "chunks" in st.session_state and "embeddings" in st.session_state:
                                 • Name: Prajwal
                                 • Phone: +9779741
                                 • Email: Khatiwada@gmail.com
-                                • Date: 2029-01-01"""
+                                • Date: 2029-01-01
+                                
+                                 If asked about different question not related to the document and appointment you just need to chat based on the query not the context of the document."""
                                 )
 
                             print(response)
